@@ -8,21 +8,23 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+  console.log(req.body);
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
     secure: false,
     auth: {
-      user: 'dangcao11111@gmail.com',
-      pass: 'haidang113'
+      user: process.env.MAIL_SEND_USERNAME,
+      pass: process.env.MAIL_SEND_PASSWORD
     }
   });
 
   const mailOptions = {
-    from: 'dangcao77777@gmail.com',
-    to: email,
-    subject: subject,
-    html: comment
+    from: process.env.MAIL_SEND_USERNAME,
+    to: process.env.MAIL_RECEIVE_USERNAME,
+    subject: req.body.subject,
+    text: req.body.message
   };
 
   transporter.sendMail(mailOptions, function(error, info){
