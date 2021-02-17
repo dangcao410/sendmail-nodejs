@@ -1,8 +1,14 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.contact {
+  margin: 2% auto;
 }
 
-a {
-  color: #00B7FF;
+.contact h2 {
+  text-align: center;
+}
+
+.contact-form {
+  width: 80%;
+  border-width: 5px;
+  border-style: outset;
+  padding: 20px 120px 20px 120px;
 }
