@@ -8,8 +8,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
-
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
@@ -24,7 +22,7 @@ router.post('/', function(req, res, next) {
     from: process.env.MAIL_SEND_USERNAME,
     to: process.env.MAIL_RECEIVE_USERNAME,
     subject: req.body.subject,
-    text: req.body.message
+    html: `<strong>Name: </strong> ${req.body.name} <br><strong>Email: </strong> ${req.body.email} <br><br><strong>Message: </strong><br>${req.body.message}`
   };
 
   transporter.sendMail(mailOptions, function(error, info){

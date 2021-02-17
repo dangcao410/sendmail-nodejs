@@ -38,4 +38,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+require('dotenv').config();
+
 module.exports = app;
