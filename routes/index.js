@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', {success_msg: '', error_msg: ''});
 });
 
 router.post('/', function(req, res, next) {
@@ -27,13 +27,18 @@ router.post('/', function(req, res, next) {
 
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
+      const error_msg = 'Something went wrong. Please try again.';
       console.log(error);
+
+      res.status(200).render('index', {success_msg: '', error_msg: error_msg});
     } else {
+      const success_msg = 'Message sent. Thank you for contacting me.';
       console.log('Email sent: ' + info.response);
+
+      res.status(200).render('index', {success_msg: success_msg, error_msg: ''});
     }
   });
 
-  res.status(200).send('EVENT_RECEIVED');
 });
 
 module.exports = router;
